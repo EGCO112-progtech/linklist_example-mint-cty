@@ -51,6 +51,7 @@ int main( void )
                if ( deletes( &startPtr, item ) ) { // remove item
                   printf( "%d deleted.\n", item );
                   printList( startPtr );
+                  reverseList( startPtr );
                } // end if
                else {
                   printf( "%d not found.\n\n", item );
@@ -95,7 +96,7 @@ void insert( LLPtr *sPtr, int value )
    if ( newPtr != NULL ) { // is space available
       newPtr->data = value; // place value in node
       newPtr->nextPtr = NULL; // node does not link to another node
-    
+      newPtr->pPtr = NULL;
        
       previousPtr = NULL;
       currentPtr = *sPtr;
@@ -118,7 +119,7 @@ void insert( LLPtr *sPtr, int value )
    
           
          newPtr->nextPtr = currentPtr;
- 
+         currentPtr->pPtr = newPtr;
          
       } // end else
    } // end if

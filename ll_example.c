@@ -40,6 +40,7 @@ int main( void )
             scanf( "%d", &item );
             insert( &startPtr, item ); // insert item in list
             printList( startPtr );
+            reverseList( startPtr );
             break;
          case 2: // delete an element
             // if list is not empty
@@ -51,6 +52,7 @@ int main( void )
                if ( deletes( &startPtr, item ) ) { // remove item
                   printf( "%d deleted.\n", item );
                   printList( startPtr );
+                  reverseList( startPtr );
                } // end if
                else {
                   printf( "%d not found.\n\n", item );
@@ -95,7 +97,7 @@ void insert( LLPtr *sPtr, int value )
    if ( newPtr != NULL ) { // is space available
       newPtr->data = value; // place value in node
       newPtr->nextPtr = NULL; // node does not link to another node
-    
+      newPtr->pPtr = NULL;
        
       previousPtr = NULL;
       currentPtr = *sPtr;
@@ -109,16 +111,21 @@ void insert( LLPtr *sPtr, int value )
       // insert new node at beginning of list
       if ( previousPtr == NULL ) { 
          newPtr->nextPtr = *sPtr;
+      if ( currentPtr != NULL ) {  
+         currentPtr->pPtr = newPtr;
       
-         *sPtr = newPtr;
-        
+        } 
+        *sPtr = newPtr;
       } // end if
       else { // insert new node between previousPtr and currentPtr
+        newPtr->pPtr = previousPtr;
          previousPtr->nextPtr = newPtr;
-   
+         
+
           
          newPtr->nextPtr = currentPtr;
- 
+        if(currentPtr)
+         currentPtr->pPtr = newPtr;
          
       } // end else
    } // end if
@@ -138,6 +145,8 @@ int deletes( LLPtr *sPtr, int value )
    if ( value == ( *sPtr )->data ) { 
       tempPtr = *sPtr; // hold onto node being removed
       *sPtr = ( *sPtr )->nextPtr; // de-thread the node
+   if (*sPtr) 
+     ( *sPtr) -> pPtr = NULL;
       free( tempPtr ); // free the de-threaded node
       return value;
    } // end if
@@ -154,7 +163,11 @@ int deletes( LLPtr *sPtr, int value )
       // delete node at currentPtr
       if ( currentPtr != NULL ) { 
          tempPtr = currentPtr;
-         previousPtr->nextPtr = currentPtr->nextPtr;
+        currentPtr = currentPtr->nextPtr;
+         previousPtr->nextPtr = currentPtr;
+        if(currentPtr)
+        currentPtr->pPtr=previousPtr;
+        
          free( tempPtr );
          return value;
       } // end if
@@ -186,8 +199,8 @@ void printList( LLPtr currentPtr )
       } // end while
 
       printf( "%d --> NULL\n",currentPtr->data );
-       
-
+     } 
+     }
      
       void reverseList( LLPtr currentPtr )
 { 
@@ -197,9 +210,9 @@ void printList( LLPtr currentPtr )
    } // end if
     else { 
       puts( "The reverse list is:" );
-      while ( currentPtr->nextPtr!= NULL ) {
-         printf( "%d --> ", currentPtr->data );
-         currentPtr = currentPtr->pPtr; 
+      while ( currentPtr->nextPtr!= NULL ) 
+    
+         currentPtr = currentPtr->nextPtr; 
         
       while ( currentPtr->pPtr!= NULL ) {
          printf( "%d --> ", currentPtr->data );
@@ -210,3 +223,4 @@ void printList( LLPtr currentPtr )
         
    } // end else
 } // end function printList
+  
