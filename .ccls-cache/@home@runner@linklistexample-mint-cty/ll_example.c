@@ -9,6 +9,7 @@ struct Node {
    struct Node *nextPtr; // pointer to next node
    struct Node *pPtr; // pointer to next node
    char NodeName[20];
+  
 }; // end structure listNode                        
 
 typedef struct Node LLnode; // synonym for struct listNode
@@ -18,7 +19,7 @@ LLPtr tmp,TMP;
 
 int deletes( LLPtr *sPtr, int value );
 int isEmpty( LLPtr sPtr );
-void insert( LLPtr *sPtr, int value );
+void insert( LLPtr *sPtr, int value , char Lname[20] );
 void printList( LLPtr currentPtr );
 void instructions( void );
 void reverseList( LLPtr currentPtr );
@@ -27,6 +28,7 @@ int main( void )
    LLPtr startPtr = NULL; // initially there are no nodes
    unsigned int choice; // user's choice
    int item; // char entered by user
+   
 
    instructions(); // display the menu
    printf( "%s", "? " );
@@ -51,7 +53,7 @@ i++;
 }
 */
            scanf("%s",name);
-            insert( &startPtr, item ); // insert item in list
+            insert( &startPtr, item, name ); // insert item in list
             printList( startPtr );
             reverseList( startPtr );
             break;
@@ -109,7 +111,7 @@ void instructions( void )
 } // end function instructions
 
 // insert a new value into the list in sorted order
-void insert( LLPtr *sPtr, int value , Lname[20] )
+void insert( LLPtr *sPtr, int value , char LName[20];)
 { 
    LLPtr newPtr; // pointer to new node
    LLPtr previousPtr; // pointer to previous node in list
@@ -122,6 +124,7 @@ void insert( LLPtr *sPtr, int value , Lname[20] )
       newPtr->nextPtr = NULL; // node does not link to another node
       newPtr->pPtr = NULL;
        strcpy(newPtr->NodeName,Lname);
+     
       previousPtr = NULL;
       currentPtr = *sPtr;
 
