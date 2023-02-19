@@ -2,7 +2,6 @@
 struct Node {                                      
    int data; // each listNode contains a number 
    Node *nextPtr; // pointer to next node
-
 }; // end structure listNode                        
 typedef struct Node LLnode; // synonym for struct listNode
 typedef LLnode *LLPtr; // synonym for ListNode*
@@ -11,7 +10,7 @@ typedef LLnode *LLPtr; // synonym for ListNode*
 
 int deletes( LLPtr &sPtr, int value );
 int isEmpty( LLPtr sPtr );
-void insert( LLPtr &sPtr, int value);
+void insert( LLPtr &sPtr, int value );
 void printList( LLPtr currentPtr );
 void instructions( void );
 
@@ -25,7 +24,7 @@ void instructions( void )
 } // end function instructions
 
 // insert a new value into the list in sorted order
-void insert( LLPtr &sPtr, int value,)
+void insert( LLPtr &sPtr, int value )
 { 
    LLPtr newPtr; // pointer to new node
    LLPtr previousPtr; // pointer to previous node in list
