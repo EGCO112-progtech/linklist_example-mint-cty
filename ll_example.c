@@ -237,7 +237,7 @@ tmp = head;
 while(tmp!=NULL)
   {
    printf("deleting ID %d\n",tmp->data);
-   printf("%s %d deleting.\n",tmp->data , tmp->NAME);
+   printf("%d %s deleting.\n",tmp->data , tmp->NAME);
    head = head->nextPtr;
    free(tmp);
    tmp = head;
